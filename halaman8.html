@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulir Pengajuan Banding Surat Peringatan</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <style>
+        body { background-color: #f8f9fa; }
+        .container-form { max-width: 900px; padding: 20px; }
+
+        .stepper { display: flex; justify-content: space-between; position: relative; margin-bottom: 30px; }
+        .stepper::before { content: ''; position: absolute; top: 15px; left: 10%; right: 10%; height: 2px; background-color: #dee2e6; z-index: 1; }
+        .step { z-index: 2; text-align: center; position: relative; flex-grow: 1; }
+        .step-icon { width: 30px; height: 30px; line-height: 30px; border-radius: 50%; display: inline-block; background-color: #fff; border: 2px solid #dee2e6; color: #6c757d; font-weight: bold; }
+        .step-active .step-icon { background-color: #0d6efd; border-color: #0d6efd; color: white; }
+        .step-title { margin-top: 5px; font-size: 0.9rem; color: #6c757d; }
+        .step-active .step-title { color: #000; font-weight: bold; }
+
+        .selected-member-card { border: 1px solid #0d6efd; background-color: #e6f0ff; border-radius: 8px; }
+        .avatar-sm { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; color: white; margin-right: 8px; flex-shrink: 0; }
+        .bg-af { background-color: #9c27b0; } 
+
+        .upload-box { border: 2px dashed #ced4da; border-radius: 8px; padding: 30px; text-align: center; cursor: pointer; }
+
+        .alert-footer { border-left: 5px solid #ffc107; background-color: #fff8e1; border-radius: 8px; }
+    </style>
+</head>
+<body>
+
+    <div class="container-fluid-form">
+        <div class="card shadow-lg">
+            <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
+                <h5 class="mb-0 fw-bold">Pengajuan Banding Surat Peringatan</h5>
+                <button class="btn btn-outline-secondary fw-semibold">X Batal</button>
+            </div>
+            <div class="card-body p-4">
+                <p class="text-muted small mb-4">Lengkapi formulir banding di bawah ini dengan menyertakan bukti pendukung.</p>
+
+                <div class="stepper">
+                    <div class="step step-active">
+                        <span class="step-icon">1</span>
+                        <div class="step-title">Surat yang Dibanding</div>
+                    </div>
+                    <div class="step">
+                        <span class="step-icon">2</span>
+                        <div class="step-title">Alasan & Bukti</div>
+                    </div>
+                </div>
+
+                <div class="mb-5">
+                    <h6 class="fw-bold mb-3">1. Surat Peringatan yang Diajukan Banding</h6>
+                    <label class="form-label fw-semibold">Cari Surat Peringatan *</label>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Ketik No. Surat (Contoh: SP/001/XI/2025)">
+                        <button class="btn btn-primary" type="button"><i class="bi bi-search"></i> Cari</button>
+                    </div>
+
+                    <label class="form-label fw-semibold">Detail Surat</label>
+                    <div class="selected-member-card p-3 mb-4">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div class="fw-bold">SP/001/XI/2025 - <span class="text-danger">SP1</span></div>
+                            <span class="text-muted small">Diterbitkan: 27 Nov 2025</span>
+                        </div>
+                        <div class="row mt-2 small">
+                            <div class="col-md-6">
+                                <div class="fw-semibold">Anggota:</div>
+                                Nandy Thaher Ulga (NPM: 24781110)
+                            </div>
+                            <div class="col-md-6">
+                                <div class="fw-semibold">Pelanggaran:</div>
+                                Tidak hadir rapat tanpa keterangan (Kategori: Kehadiran)
+                            </div>
+                        </div>
+                        <p class="text-muted small mt-2 mb-0 fst-italic">Status Surat: Approved</p>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h6 class="fw-bold mb-3">2. Alasan Pengajuan Banding</h6>
+                    
+                    <label class="form-label fw-semibold">Alasan Utama Banding *</label>
+                    <select class="form-select mb-3">
+                        <option selected>Pilih Alasan</option>
+                        <option>Bukan anggota yang bersalah</option>
+                        <option>Terdapat bukti baru yang meringankan</option>
+                        <option>Surat peringatan tidak sesuai dengan tingkat pelanggaran</option>
+                        <option>Terdapat kesalahan dalam kronologi pelanggaran</option>
+                        <option>Lainnya</option>
+                    </select>
+
+                    <label class="form-label fw-semibold">Uraian Detail Banding *</label>
+                    <textarea class="form-control mb-3" rows="5" placeholder="Jelaskan secara rinci alasan Anda mengajukan banding dan mengapa Surat Peringatan harus dicabut atau diubah..."></textarea>
+                    
+                    <label class="form-label fw-semibold">Lampiran Bukti Pendukung (Wajib)</label>
+                    <div class="upload-box text-muted">
+                        <i class="bi bi-paperclip fs-3 mb-2"></i>
+                        <p class="mb-0 fw-semibold">Klik untuk upload atau drag & drop</p>
+                        <p class="small">Dokumen wajib: Bukti kehadiran, tangkapan layar, surat pernyataan (Maks. 10MB)</p>
+                    </div>
+                </div>
+
+                <div class="alert-footer p-3 d-flex align-items-start small text-dark">
+                    <i class="bi bi-info-circle-fill text-primary me-2 fs-5"></i>
+                    <div>
+                        <span class="fw-bold">Informasi:</span>
+                        Proses banding akan ditinjau oleh tim pengurus dalam waktu 2-3 hari kerja. Anda akan menerima notifikasi status banding.
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-footer bg-white d-flex justify-content-end py-3">
+                <button class="btn btn-outline-secondary me-2 fw-semibold"><i class="bi bi-save me-1"></i> Simpan Draft</button>
+                <button class="btn btn-success fw-semibold"><i class="bi bi-check-circle-fill me-1"></i> Kirim Pengajuan Banding</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
