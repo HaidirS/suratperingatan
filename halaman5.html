@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard UKM - Verifikasi & Monitoring Surat Peringatan</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container-dashboard {
+            max-width: 1400px;
+        }
+        
+        .dashboard-header {
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .card-stat {
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e9ecef;
+        }
+        .stat-icon {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            margin-right: 15px;
+        }
+        .urgent-card { border: 2px solid #ffc107 !important; }
+        .approved-card { border: 2px solid #28a745 !important; }
+        .rejected-card { border: 2px solid #dc3545 !important; }
+        .total-card { border: 2px solid #007bff !important; }
+
+        .urgent-icon { background-color: #fff3cd; color: #ffc107; }
+        .approved-icon { background-color: #d4edda; color: #28a745; }
+        .rejected-icon { background-color: #f8d7da; color: #dc3545; }
+        .total-icon { background-color: #cce5ff; color: #007bff; }
+        
+        .alert-custom {
+            border-left: 5px solid #ffc107;
+            background-color: #fff8e1;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .sp-badge {
+            padding: 2px 8px;
+            border-radius: .25rem;
+            font-weight: bold;
+            font-size: 0.75em;
+            color: #fff;
+            margin-left: 5px;
+        }
+        .badge-sp1 { background-color: #79ad2c; }
+        .badge-sp2 { background-color: #ff9800; }
+        .badge-sp3 { background-color: #dc3545; }
+
+        .list-item-verifikasi {
+            padding: 20px;
+        }
+        .detail-info-surat {
+            font-size: 0.9rem;
+            color: #495057;
+        }
+
+        .progress-bar-sp1 { background-color: #79ad2c; }
+        .progress-bar-sp2 { background-color: #ff9800; }
+        .progress-bar-sp3 { background-color: #dc3545; }
+
+        .verification-timeline li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 15px;
+            list-style: none;
+        }
+        .verification-timeline li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        .timeline-approved::before { background-color: #28a745; }
+        .timeline-rejected::before { background-color: #dc3545; }
+        .timeline-approved i, .timeline-rejected i {
+            position: absolute;
+            left: -3px;
+            top: 2px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="bg-white py-3 mb-4 shadow-sm dashboard-header">
+        <div class="container-dashboard px-4 d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                <i class="bi bi-speedometer2 text-warning fs-4 me-2"></i>
+                <h5 class="mb-0 fw-bold text-dark">Dashboard Ketua UKM</h5>
+                <span class="ms-3 text-secondary d-none d-md-inline">Verifikasi & Monitoring Surat Peringatan</span>
+            </div>
+            <div class="d-flex align-items-center">
+                <i class="bi bi-bell-fill text-danger fs-5 me-3"></i>
+                <span class="rounded-circle bg-danger text-white d-flex align-items-center justify-content-center" style="width: 35px; height: 35px; font-weight: bold;">RW</span>
+                <div class="ms-2">
+                    <span class="d-block fw-bold">Augie Radithya</span>
+                    <span class="d-block text-muted small">Ketua UKM</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container-fluid-dashboard px-4">
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="card card-stat p-3 urgent-card">
+                    <div class="card-body p-0">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div class="stat-icon urgent-icon">
+                                <i class="bi bi-clock-fill fs-5"></i>
+                            </div>
+                            <span class="badge text-warning-emphasis bg-warning-subtle fw-bold">Urgent</span>
+                        </div>
+                        <h4 class="mt-3 mb-0 fw-bold">12</h4>
+                        <p class="text-muted mb-0 small">Menunggu Verifikasi</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="card card-stat p-3 approved-card">
+                    <div class="card-body p-0">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div class="stat-icon approved-icon">
+                                <i class="bi bi-check-circle-fill fs-5"></i>
+                            </div>
+                        </div>
+                        <h4 class="mt-3 mb-0 fw-bold">36</h4>
+                        <p class="text-muted mb-0 small">Disetujui Bulan Ini</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="card card-stat p-3 rejected-card">
+                    <div class="card-body p-0">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div class="stat-icon rejected-icon">
+                                <i class="bi bi-x-octagon-fill fs-5"></i>
+                            </div>
+                        </div>
+                        <h4 class="mt-3 mb-0 fw-bold">2</h4>
+                        <p class="text-muted mb-0 small">Ditolak Bulan Ini</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="card card-stat p-3 total-card">
+                    <div class="card-body p-0">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div class="stat-icon total-icon">
+                                <i class="bi bi-file-earmark-text-fill fs-5"></i>
+                            </div>
+                            <span class="badge text-success-emphasis bg-success-subtle fw-bold">+12%</span>
+                        </div>
+                        <h4 class="mt-3 mb-0 fw-bold">48</h4>
+                        <p class="text-muted mb-0 small">Total Surat</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="alert-custom d-flex align-items-start mt-4 mb-4">
+            <div class="stat-icon urgent-icon me-3 flex-shrink-0">
+                <i class="bi bi-exclamation-triangle-fill fs-5"></i>
+            </div>
+            <div>
+                <span class="fw-bold text-dark">Perhatian: 8 Surat Menunggu Verifikasi Anda</span>
+                <p class="mb-0 text-secondary small">Ada beberapa surat peringatan yang menunggu persetujuan Anda. Harap segera ditindaklanjuti.</p>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-8">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
+                        <h6 class="mb-0 fw-bold text-dark">Surat Menunggu Verifikasi</h6>
+                        <span class="badge bg-warning text-dark fw-bold px-3 py-2">8 surat</span>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="list-item-verifikasi border-bottom">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="fw-bold text-dark">
+                                    <span class="me-2">SP/002/XI/2025</span>
+                                    <span class="sp-badge badge-sp2">SP2</span>
+                                    <span class="text-muted fw-normal small ms-2">· Diajukan 1 hari yang lalu</span>
+                                </div>
+                            </div>
+                            <div class="row mt-3 detail-info-surat">
+                                <div class="col-md-4">
+                                    <div class="fw-bold">Anggota</div>
+                                    <div>Marsha Elnaviri</div>
+                                    <div class="text-muted">NPM: 24781117</div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="fw-bold">Pelanggaran</div>
+                                    <div>Melanggar aturan keuangan</div>
+                                    <div class="text-muted">Kategori: Keuangan</div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="fw-bold">Dibuat oleh</div>
+                                    <div>Amira Aulia Salsabila</div>
+                                    <div class="text-muted">Sekretaris</div>
+                                </div>
+                            </div>
+                            <p class="mt-2 text-dark small">Anggota yang bersangkutan telah melakukan pelanggaran terhadap aturan keuangan organisasi dengan tidak melaporkan penggunaan dana kegiatan sesuai prosedur yang berlaku...</p>
+                            <div class="d-flex justify-content-between align-items-center pt-2">
+                                <a href="#" class="btn btn-sm text-primary fw-semibold p-0">Lihat Detail Lengkap</a>
+                                <div>
+                                    <button class="btn btn-sm btn-outline-danger me-2 fw-bold rounded-pill"><i class="bi bi-x-circle-fill me-1"></i> Tolak</button>
+                                    <button class="btn btn-sm btn-success fw-bold rounded-pill"><i class="bi bi-check-circle-fill me-1"></i> Setujui</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="list-item-verifikasi border-bottom">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="fw-bold text-dark">
+                                    <span class="me-2">SP/004/XI/2025</span>
+                                    <span class="sp-badge badge-sp1">SP1</span>
+                                    <span class="text-muted fw-normal small ms-2">· Diajukan 2 jam yang lalu</span>
+                                </div>
+                            </div>
+                            <div class="row mt-3 detail-info-surat">
+                                <div class="col-md-4">
+                                    <div class="fw-bold">Anggota</div>
+                                    <div>Desi Anggraini</div>
+                                    <div class="text-muted">NPM: 24751114</div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="fw-bold">Pelanggaran</div>
+                                    <div>Tidak hadir meeting online</div>
+                                    <div class="text-muted">Kategori: Kehadiran</div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="fw-bold">Dibuat oleh</div>
+                                    <div>Amira Aulia Salsabila</div>
+                                    <div class="text-muted">Sekretaris</div>
+                                </div>
+                            </div>
+                            <p class="mt-2 text-dark small">Tidak menghadiri *meeting online* penting terkait persiapan *event* besar UKM pada tanggal 24 November 2025 tanpa pemberitahuan...</p>
+                            <div class="d-flex justify-content-between align-items-center pt-2">
+                                <a href="#" class="btn btn-sm text-primary fw-semibold p-0">Lihat Detail Lengkap</a>
+                                <div>
+                                    <button class="btn btn-sm btn-outline-danger me-2 fw-bold rounded-pill"><i class="bi bi-x-circle-fill me-1"></i> Tolak</button>
+                                    <button class="btn btn-sm btn-success fw-bold rounded-pill"><i class="bi bi-check-circle-fill me-1"></i> Setujui</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-center p-3">
+                            <a href="#" class="text-primary fw-semibold">Lihat 6 surat lainnya →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="row g-4">
+                    <div class="col-12">
+                        <div class="card shadow-sm h-100">
+                            <div class="card-header bg-white py-3">
+                                <h6 class="mb-0 fw-bold text-dark">Distribusi Tingkat SP</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between small">
+                                        <span class="fw-semibold">SP1 (Ringan)</span>
+                                        <span>18 surat</span>
+                                    </div>
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar progress-bar-sp1" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between small">
+                                        <span class="fw-semibold">SP2 (Sedang)</span>
+                                        <span>12 surat</span>
+                                    </div>
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar progress-bar-sp2" role="progressbar" style="width: 40%;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="d-flex justify-content-between small">
+                                        <span class="fw-semibold">SP3 (Berat)</span>
+                                        <span>6 surat</span>
+                                    </div>
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar progress-bar-sp3" role="progressbar" style="width: 20%;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="card shadow-sm h-100">
+                            <div class="card-header bg-white py-3">
+                                <h6 class="mb-0 fw-bold text-dark">Aktivitas Verifikasi</h6>
+                            </div>
+                            <div class="card-body">
+                                <ul class="verification-timeline p-0">
+                                    <li class="timeline-approved">
+                                        <i class="bi bi-check-circle-fill text-success"></i>
+                                        <span class="fw-semibold small">Menyetujui SP/001/XI/2025</span>
+                                        <div class="text-muted small">2 jam yang lalu</div>
+                                    </li>
+                                    <li class="timeline-rejected">
+                                        <i class="bi bi-x-circle-fill text-danger"></i>
+                                        <span class="fw-semibold small">Menolak SP/003/XI/2025</span>
+                                        <div class="text-muted small">1 hari yang lalu</div>
+                                    </li>
+                                    <li class="timeline-approved">
+                                        <i class="bi bi-check-circle-fill text-success"></i>
+                                        <span class="fw-semibold small">Menyetujui SP/005/X/2025</span>
+                                        <div class="text-muted small">3 hari yang lalu</div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
