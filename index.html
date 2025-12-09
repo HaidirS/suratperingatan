@@ -81,11 +81,11 @@
 
             <div class="mb-3">
                 <label for="loginSebagai" class="form-label">Login Sebagai</label>
-                <select class="form-select" id="loginSebagai">
-                    <option value="anggota" selected>Anggota</option>
-                    <option value="pengurus">Pengurus</option>
-                    <option value="admin">Admin</option>
-                    <option value="ketua">Ketua</option>
+                <select onchange="location.href=this.value" class="form-select" id="loginSebagai">
+                    <option value="halaman6.html" selected>Anggota</option>
+                    <option value="halaman3.html">Pengurus</option>
+                    <option value="halaman1.html">Admin</option>
+                    <option value="halaman5.html">Ketua</option>
                 </select>
             </div>
             
@@ -98,7 +98,7 @@
             </div>
 
             <div class="d-grid mb-3">
-                <a href="halaman2.html" target="_self" class="btn btn-purple-gradient btn-lg d-flex justify-content-center align-items-center">
+                <a href="Anggota.html" target="_self" class="btn btn-purple-gradient btn-lg d-flex justify-content-center align-items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-right-short me-2" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
                     </svg>
@@ -119,5 +119,4 @@
 
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
-
 </html>
